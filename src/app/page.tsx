@@ -1,82 +1,96 @@
 import Link from "next/link";
-
-import { CreatePost } from "~/app/_components/create-post";
-import { getServerAuthSession } from "~/server/auth";
-import { api } from "~/trpc/server";
+import type { ComponentProps } from "react";
+import { NextImage, Typography } from "~/ui";
+import siteConfig from "../config/siteConfig";
+import { cn, variants } from "../lib/cva";
+import { getServerAuthSession } from "../server/auth";
 
 export default async function Home() {
-  const hello = await api.post.hello.query({ text: "from tRPC" });
   const session = await getServerAuthSession();
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
+    <main className="   w-full    ">
+      <Section className="container h-screen md:flex-row">
+        <NextImage
+          src={"undraw_resume_re_hkth.svg"}
+          alt="landing page image "
+          className="  aspect-[753/703] h-full max-h-80 drop-shadow-[4px_4px_3px] md:h-auto   md:w-80  "
+        />
+        <Typography.aside className=" md:max-w-[50%]">
+          <h2>{siteConfig.landing.title}</h2>
+          <p>{siteConfig.landing.text}</p>
+        </Typography.aside>
+      </Section>
+      <Section className=" h-80 bg-slate-100 py-16 mn:py-8">
+        <NextImage
+          src={"undraw_setup_re_y9w8.svg"}
+          alt="landing page image "
+          className="  aspect-[897/585] h-full  drop-shadow-[4px_4px_3px]"
+        />
+        <Typography.aside>
+          <p>{siteConfig.fill1.title}</p>
+        </Typography.aside>
+      </Section>
+      <Section className="     ">
+        <div className=" absolute inset-0 -z-10 overflow-hidden">
+          <div className=" absolute -right-1/2 -top-20 aspect-square w-full rounded-full border-[24px] border-primary/70 xs:bottom-1/2 xs:right-0 xs:top-auto" />
+          <div className=" absolute -bottom-20 right-1/2 aspect-square w-full rounded-full border-[24px] border-primary/70 xs:bottom-0 xs:right-1/2" />
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-2xl text-white">
-            {hello ? hello.greeting : "Loading tRPC query..."}
-          </p>
 
-          <div className="flex flex-col items-center justify-center gap-4">
-            <p className="text-center text-2xl text-white">
-              {session && <span>Logged in as {session.user?.name}</span>}
-            </p>
-            <Link
-              href={session ? "/api/auth/signout" : "/api/auth/signin"}
-              className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
+        <div className=" grid w-full grid-flow-col grid-rows-6 place-content-center  gap-4  xs:grid-rows-[repeat(3,auto)] lg:grid-flow-row lg:grid-cols-[repeat(3,auto)]    ">
+          {siteConfig.cardsSection.map(({ text, title }, index) => (
+            <Typography.div
+              key={title}
+              className={cn(
+                " m-auto flex h-60  w-60 flex-col items-center justify-center rounded p-4  shadow mn:h-72 mn:w-72       ",
+                {
+                  " bg-primary/30": index % 2 === 0,
+                  " bg-slate-100": index % 2 !== 0,
+                },
+              )}
             >
-              {session ? "Sign out" : "Sign in"}
-            </Link>
-          </div>
+              <h2>{title}</h2>
+              <p>{text}</p>
+            </Typography.div>
+          ))}
         </div>
-
-        <CrudShowcase />
-      </div>
+      </Section>
+      <Section className=" h-80   overflow-hidden py-16 text-neutral-white mn:py-8">
+        <div className=" circles absolute inset-0 -z-10 scale-[2]" />
+        <Typography.aside>
+          <h2 className=" text-border">{siteConfig.fill2.title}</h2>
+        </Typography.aside>
+        {session && session.user ? (
+          <Link
+            className={variants({
+              variant: "fill",
+              className: "w-40 capitalize",
+            })}
+            href={"/dashboard"}
+          >
+            start
+          </Link>
+        ) : (
+          <Link
+            className={variants({
+              variant: "fill",
+              className: "w-40 capitalize",
+            })}
+            scroll={false}
+            href={"#"}
+          >
+            register
+          </Link>
+        )}
+      </Section>
     </main>
   );
 }
-
-async function CrudShowcase() {
-  const session = await getServerAuthSession();
-  if (!session?.user) return null;
-
-  const latestPost = await api.post.getLatest.query();
-
-  return (
-    <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
-
-      <CreatePost />
-    </div>
-  );
-}
+const Section = (props: ComponentProps<"section">) => (
+  <section
+    {...props}
+    className={cn(
+      "relative flex  w-full flex-col items-center   justify-center gap-4 px-4 py-20 text-center  ",
+      props.className,
+    )}
+  />
+);

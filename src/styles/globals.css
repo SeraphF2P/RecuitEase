@@ -1,3 +1,108 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.form-input {
+  @apply mx-1 rounded-full;
+}
+
+/* .shadow-buble {
+  background: white;
+  --container-width: 60px;
+  --container-height: 60px;
+  --step: 4px;
+  width: var(--container-width);
+  height: var(--container-height);
+  box-shadow:
+    4px 4px 20px rgb(var(--variant), 0.1) inset,
+    -4px 4px 20px rgb(var(--variant), 0.6) inset,
+    4px -4px 20px rgb(var(--variant), 0.1) inset,
+    -4px -4px 20px rgb(var(--variant), 0.6) inset,
+    8px 8px 20px rgb(var(--variant), 0.1) inset,
+    -8px 8px 20px rgb(var(--variant), 0.4) inset,
+    8px -8px 20px rgb(var(--variant), 0.1) inset,
+    -8px -8px 20px rgb(var(--variant), 0.4) inset,
+    16px 16px 20px rgb(var(--variant), 0.1) inset,
+    -16px 16px 20px rgb(var(--variant), 0.9) inset,
+    16px -16px 20px rgb(var(--variant), 0.1) inset,
+    -16px -16px 20px rgb(var(--variant), 0.9) inset;
+} */
+
+/* .isometric {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image: linear-gradient(
+      30deg,
+      rgb(var(--primary)) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgb(var(--primary)) 87.5%,
+      rgb(var(--primary))
+    ),
+    linear-gradient(
+      150deg,
+      rgb(var(--primary)) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgb(var(--primary)) 87.5%,
+      rgb(var(--primary))
+    ),
+    linear-gradient(
+      30deg,
+      rgb(var(--primary)) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgb(var(--primary)) 87.5%,
+      rgb(var(--primary))
+    ),
+    linear-gradient(
+      150deg,
+      rgb(var(--primary)) 12%,
+      transparent 12.5%,
+      transparent 87%,
+      rgb(var(--primary)) 87.5%,
+      rgb(var(--primary))
+    ),
+    linear-gradient(
+      60deg,
+      rgb(var(--primary), 0.47) 25%,
+      transparent 25.5%,
+      transparent 75%,
+      rgb(var(--primary), 0.47) 75%,
+      rgb(var(--primary), 0.47)
+    ),
+    linear-gradient(
+      60deg,
+      rgb(var(--primary), 0.47) 25%,
+      transparent 25.5%,
+      transparent 75%,
+      rgb(var(--primary), 0.47) 75%,
+      rgb(var(--primary), 0.47)
+    );
+  background-size: 80px 140px;
+  background-position:
+    0 0,
+    0 0,
+    40px 72px,
+    40px 72px,
+    0 0,
+    40px 72px;
+} */
+.circles {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image: radial-gradient(
+      circle at center center,
+      rgb(var(--primary), 0.47),
+      #e5e5f7
+    ),
+    repeating-radial-gradient(
+      circle at center center,
+      rgb(var(--primary), 0.47),
+      rgb(var(--primary), 0.47),
+      10px,
+      transparent 20px,
+      transparent 10px
+    );
+  background-blend-mode: multiply;
+}
