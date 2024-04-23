@@ -3,19 +3,17 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 
-import Link from "next/link";
 import { TRPCReactProvider } from "~/trpc/react";
+import { NextImage, NextLink } from "~/ui";
+import ReduxProvider from "../lib/ReduxProvider";
 import { Toaster } from "../lib/myToast";
 import { getServerAuthSession } from "../server/auth";
+import Footer from "./_components/Footer";
 import Header from "./_components/Header";
 import LoginModale from "./_components/LoginModale";
 import Logout from "./_components/Logout";
-import SignUpModale from "./_components/SignUpModale";
-import { NextImage, NextLink, Typography } from "~/ui";
-import Footer from "./_components/Footer";
 import MenuBtn from "./_components/MenuBtn";
-import { cn } from "../lib/cva";
-import ReduxProvider from "../lib/ReduxProvider";
+import SignUpModale from "./_components/SignUpModale";
 
 const inter = Inter({
   subsets: ["latin"],

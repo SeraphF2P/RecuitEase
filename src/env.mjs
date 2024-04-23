@@ -7,6 +7,8 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
+    EDGE_STORE_ACCESS_KEY: z.string(),
+    EDGE_STORE_SECRET_KEY: z.string(),
     DATABASE_URL: z
       .string()
       .url()
@@ -44,6 +46,8 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
+    EDGE_STORE_ACCESS_KEY: process.env.EDGE_STORE_ACCESS_KEY,
+    EDGE_STORE_SECRET_KEY: process.env.EDGE_STORE_SECRET_KEY,
     DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,

@@ -6,7 +6,8 @@ import Question from "./Question";
 
 export default function AdditionalQuestions() {
   const {
-    personalInformation: { createQues, values },
+    personalInformation: { createQues },
+    values
   } = useReduxFormSlice();
   return (
     <section className=" divide-y-2  ">

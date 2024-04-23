@@ -1,8 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import useScrollDir from "~/hooks/useScrollDir";
 import { cn } from "~/lib/cva";
+import { useScrollDir } from "~/hooks/useScrollDir";
 
 export const Header = ({ children }: { children: ReactNode }) => {
   const dir = useScrollDir({

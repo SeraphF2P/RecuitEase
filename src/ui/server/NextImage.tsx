@@ -20,6 +20,7 @@ export const NextImage: FC<NextImageProps> = ({
       <Image
         className={cn("absolute inset-0 m-0 object-cover ")}
         fill
+        sizes={sizes}
         {...props}
         alt={props.alt}
       />

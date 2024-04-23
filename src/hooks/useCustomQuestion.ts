@@ -1,17 +1,14 @@
+import { useLocalStorage } from '@mantine/hooks';
+import { produce } from 'immer';
 import type { FormEvent } from "react";
-import { useLocalStorage } from "./useStorage";
-import { z } from "zod";
-import { produce } from 'immer'
-import { questionsOpts } from "../config/siteConfig";
-import ZOD from "../lib/ZOD";
+import { ZOD, type questionDetailsType, type z } from "../lib/ZOD";
 
-
-export type createQuestionType = z.infer<typeof ZOD.question>;
-export interface customQuestionType extends z.infer<typeof ZOD.question> {
+export type createQuestionType = z.infer<typeof ZOD.question[keyof typeof ZOD.question]>;
+export type customQuestionType = createQuestionType & {
   id: string;
 }
 export function useCustomQuestion({ key }: { key: string }) {
-  const [values, setValues] = useLocalStorage<customQuestionType[]>(key, []);
+  const [values, setValues] = useLocalStorage<customQuestionType[]>({ key, defaultValue: [] });
   function create(values: createQuestionType) {
     setValues(prev => produce(prev, (draft) => {
       draft?.push({
@@ -51,8 +48,8 @@ export function useCustomQuestion({ key }: { key: string }) {
   const validFormData = (e: FormEvent) => {
     e.preventDefault();
     const formValues = new FormData(e.target as HTMLFormElement);
-    const values = Object.fromEntries(formValues.entries());
-    return ZOD.question.parse(values);
+    const values = Object.fromEntries(formValues.entries()) as unknown as questionDetailsType;
+    return ZOD.question[values.type].parse(values);
   };
 
   const createHandler = (e: FormEvent) => {

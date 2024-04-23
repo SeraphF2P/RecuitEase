@@ -20,12 +20,14 @@ export default function SaveForm({ userId }: SaveFormProps) {
       <Input ref={FormNameField} label="form name" />
       <input type="hidden" value={userId} />
       <Btn
-        onClick={() =>
+        onClick={() => {
+          if(FormNameField.current == null) return;
           mutate({
             userId,
-            name: FormNameField.current?.value,
+            name: FormNameField.current.value,
             ...values,
           })
+        }
         }
       >
         save

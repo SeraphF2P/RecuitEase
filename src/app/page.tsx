@@ -65,7 +65,7 @@ export default async function Home() {
               variant: "fill",
               className: "w-40 capitalize",
             })}
-            href={"/dashboard"}
+            href={`/dashboard/${session.user.id}`}
           >
             start
           </Link>

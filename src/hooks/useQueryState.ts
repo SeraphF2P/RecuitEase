@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { produce } from "immer";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -14,7 +15,7 @@ export function useQueryState(name: string) {
     });
     const searchQuery = new URLSearchParams(Object.entries(query));
 
-    router.push(pathname + "?" + searchQuery);
+    router.push(`${pathname}?${searchQuery}`);
   };
   const toggle = (value: string) => {
     if (name === "clear") return router.push(pathname);
@@ -28,7 +29,7 @@ export function useQueryState(name: string) {
     });
     const searchQuery = new URLSearchParams(Object.entries(query));
 
-    router.push(pathname + "?" + searchQuery);
+    router.push(`${pathname}?${searchQuery}`);
   };
   return { set, toggle } as const;
 }

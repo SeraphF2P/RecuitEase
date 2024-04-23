@@ -1,4 +1,4 @@
-import { Icon } from "~/ui";
+import { Icon, NextImage } from "~/ui";
 import * as React from "react";
 import { useDropzone, type DropzoneOptions } from "react-dropzone";
 import { twMerge } from "tailwind-merge";
@@ -133,10 +133,10 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
 
           {imageUrl ? (
             // Image Preview
-            <img
+            <NextImage
               className="h-full w-full rounded-md object-cover"
               src={imageUrl}
-              alt={acceptedFiles[0]?.name}
+              alt={acceptedFiles[0]?.name ?? "image preview"}
             />
           ) : (
             // Upload Icon

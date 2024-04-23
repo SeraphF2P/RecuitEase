@@ -2,7 +2,7 @@ import { ZOD, z } from '~/lib/ZOD';
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const formRouter = createTRPCRouter({
-  saveForm: protectedProcedure.input(ZOD.form).mutation(async ({ ctx }) => {
+  saveForm: protectedProcedure.input(ZOD.form).mutation(async () => {
     return
 
   }),
@@ -11,10 +11,8 @@ export const formRouter = createTRPCRouter({
       where: {
         id: ctx.session.user.id
       },
-      select: {
-        forms: true
-      }
+
     })
-    return
+    return user
   }),
 })

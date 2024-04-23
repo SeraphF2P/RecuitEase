@@ -7,7 +7,7 @@ import {
   motion as m,
 } from "framer-motion";
 import { cn, variants } from "~/lib/cva";
-import Icon from "../server/Icon";
+import {Icon} from "../server/Icon";
 
 const ScrollToTopBtn = () => {
   const { scrollY } = useScroll();
@@ -25,7 +25,7 @@ const ScrollToTopBtn = () => {
         "fixed bottom-1/2 right-12 z-30   scroll-smooth p-2 ",
       )}
     >
-      <Icon name="upArrow" className=" h-4 w-4 -rotate-90 fill-slate-100" />
+      <Icon.upArrow className=" h-4 w-4 -rotate-90 fill-slate-100" />
     </m.a>
   );
 };
